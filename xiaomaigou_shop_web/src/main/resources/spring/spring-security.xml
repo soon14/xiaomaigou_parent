@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 设置页面不登陆也可以访问 -->
+    <!-- security="none"  设置此资源不被拦截 -->
+    <!-- /ano目录下的所有资源均不拦截，这样以后添加页面更方便一些 -->
+    <http pattern="/ano/**" security="none"></http>
+    <http pattern="/css/**" security="none"></http>
+    <http pattern="/img/**" security="none"></http>
+    <http pattern="/js/**" security="none"></http>
+    <http pattern="/plugins/**" security="none"></http>
+    <http pattern="/assets/**" security="none"></http>
+    <!-- 用于商家申请时需要访问 -->
+    <http pattern="/seller/add.do" security="none"></http>
+
+    <!-- 页面的拦截规则    use-expressions:是否启动SPEL表达式 默认是true ,如果开启，则拦截的配置应该写成以下形式 <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" /> 若为access="ROLE_ADMIN"格式则必须为false-->
+    <http use-expressions="false">
+        <!-- 当前用户必须有ROLE_SELLER的角色 才可以访问根目录及所属子目录的资源 /**表示的是该目录以及该目录下所有级别子目录的资源 而/* 表示的是该目录下的资源，只包括本级目录不包括下级目录 -->
+        <!-- access="ROLE_SELLER"中的ROLE_SELLER需要和代码中设置的角色一致 -->
+        <!-- access：必须以"ROLE_"开头，后面的自己定义 -->
+        <intercept-url pattern="/**" access="ROLE_SELLER"/>
+        <!-- 开启表单登陆功能 -->
+        <!-- login-page：指定登录页面。-->
+        <!-- authentication-failure-url：指定了身份验证失败时跳转到的页面。-->
+        <!-- default-target-url：指定了成功进行身份验证和授权后默认呈现给用户的页面。-->
+        <!-- always-use-default-target：指定了是否在身份验证通过后总是跳转到default-target-url属性指定的URL -->
+        <form-login  login-page="/ano/shoplogin.html" default-target-url="/admin/index.html" authentication-failure-url="/ano/login_error.html" always-use-default-target="true"/>
+        <!-- csrf disabled="true"  关闭csrf  -->
+        <!-- CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用 -->
+        <csrf disabled="true"/>
+        <!-- 如果在你的系统中使用了框架页，需要设置框架页的策略为SAMEORIGIN，否则登录后的内置框架页也被拦截，不能访问 -->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+        <!-- 退出登录 -->
+        <!--加此配置后，会自动的产生退出登录的地址/logout,如果你不想用这个地址 ，你也可以定义生成的退出地址以及跳转的页面，配置如下-->
+        <!--logout-url:退出的地址，会自动生成-->
+        <!--logout-success-url:退出后跳转的地址-->
+        <!--<logout logout-url="" logout-success-url=""/>-->
+        <logout/>
+    </http>
+
+    <!-- 认证管理器 -->
+    <authentication-manager>
+        <!-- 使用userDetailService类认证-->
+        <authentication-provider user-service-ref="userDetailService">
+            <!-- BCrypt密码加密 -->
+            <password-encoder ref="bcryptEncoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- 认证类 -->
+    <!-- userDetailService接口实现类 -->
+    <beans:bean id="userDetailService" class="com.xiaomaigou.service.UserDetailsServiceImpl">
+        <!-- userDetailService接口实现类中使用的是配置方式调用服务，其中ref="sellerService"必须以下面dubbo服务请求的id="sellerService"相同 -->
+        <beans:property name="sellerService" ref="sellerService"></beans:property>
+    </beans:bean>
+
+    <!-- 引用dubbo 服务 -->
+    <dubbo:application name="xiaomaigou_shop_web" />
+    <dubbo:registry address="zookeeper://192.168.199.99:2181"/>
+    <!-- 请求的接口名称和id，其中id="sellerService"必须以上面userDetailService接口实现类服务请求的ref="sellerService"相同 -->
+    <dubbo:reference id="sellerService" interface="com.xiaomaigou.sellergoods.service.SellerService"></dubbo:reference>
+
+    <!--BCrypt密码加密所使用的类 -->
+    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+</beans:beans>

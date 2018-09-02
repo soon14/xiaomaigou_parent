@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+<!-- TODO 本项目xiaomaigou_content_service缺少注解式事务 -->
+    <!-- 访问dubbo所要占用的端口 -->
+    <!-- 注意：启动多个服务工程时，不要发生端口冲突，因为连接dubbox注册中心的端口默认是20880。所以需要配置一下pinyougou-content-service工程的dubbox端口 -->
+    <dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
+    <!-- 当前的应用在注册中心的名称 -->
+    <dubbo:application name="xiaomaigou_content_service"/>
+    <!-- dubbo注册中心zookeeper地址 -->
+    <dubbo:registry address="zookeeper://192.168.199.99:2181"/>
+    <!--dubbo的扫描包，告诉dubbo这个服务所在的包 -->
+    <dubbo:annotation package="com.xiaomaigou.content.service.impl"/>
+
+</beans>
