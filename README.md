@@ -10,7 +10,7 @@
 [小麦购商场-商家后台管理](http://shop.xiaomaigou.com:9999) (用户名:xiaomaigou，密码:123456)<br>
 [小麦购商场-商品搜索](http://search.xiaomaigou.com:9999) <br>
 
-小麦购(XiaoMaiGou.COM)项目是一套整合 **Dubbo+Zookeeper+SpringMVC+Spring+MyBatis** 支持**分布式**高效率便捷开发**RPC**框架的企业级大型分布式电商网站系统，使开发人员更专注于业务，达到面向业务开发。<br>
+小麦购商城(XiaoMaiGou.COM)-企业级大型分布式电子商务网站系统项目是一套模仿京东商城、整合 **Dubbo+Zookeeper+SpringMVC+Spring+MyBatis** 支持**分布式**高效率便捷开发**RPC**框架的企业级大型分布式电商网站系统，使开发人员更专注于业务，达到面向业务开发。<br>
 项目使用 **Maven** 构建，便于项目管理，可支持 **MySql、Oracle** 等主流数据库。<br>
 项目模块化分层明确，代码规范，便于后期维护等工作。<br>
 前端展示界面采用基于 **Boostrap、AngularJS** 实现的响应式布局，并集成了一系列的动画效果插件，整体界面简洁、美观大方并可优雅的与后台完成交互操作。<br>
