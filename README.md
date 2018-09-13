@@ -4,7 +4,7 @@
   <img src="src/main/resources/xiaomaigoulogo/xiaomaigoulogo.png" alt="xiaomaigou.com" title="xiaomaigou.com">
 </p>
 项目演示：<br>
-[小麦购商场-首页](http://xiaomaigou.com:9999/) <br>
+[xiaomaigou](http://xiaomaigou.com:9999/) <br>
 [小麦购商场-运营商后台管理](http://admin.xiaomaigou.com:9999) 用户名:admin，密码:123456<br>
 [小麦购商场-商家后台管理](http://shop.xiaomaigou.com:9999) 用户名:xiaomaigou，密码:123456<br>
 [小麦购商场-商品搜索](http://search.xiaomaigou.com:9999) <br>
@@ -14,7 +14,6 @@
 项目模块化分层明确，代码规范，便于后期维护等工作。<br>
 前端展示界面采用基于 **Boostrap、AngularJS** 实现的响应式布局，并集成了一系列的动画效果插件，整体界面简洁、美观大方并可优雅的与后台完成交互操作。<br>
 项目目标是为大型电子商务企业打造全方位的J2EE企业级开发解决方案，提高工作效率。<br>
-该项目是[xiaomaiyun_SSM](http://search.xiaomaigou.com:9999)项目的**简化版**，完整资料请参照[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目，持续更新中，敬请期待...
 该项目是[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目的**简化版**，完整资料请参照[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目，持续更新中，敬请期待...
 
 ## 近期更新内容
