@@ -4,7 +4,8 @@
   <img src="src/main/resources/xiaomaigoulogo/xiaomaigoulogo.png" alt="xiaomaigou.com" title="xiaomaigou.com">
 </p>
 项目演示：<br>
-[xiaomaigou](http://xiaomaigou.com:9999/) <br>
+该项目是[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目的**简化版**，完整资料请参照[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目，持续更新中，敬请期待...
+[小麦购商场-首页](http://xiaomaigou.com:9999/) <br>
 [小麦购商场-运营商后台管理](http://admin.xiaomaigou.com:9999) 用户名:admin，密码:123456<br>
 [小麦购商场-商家后台管理](http://shop.xiaomaigou.com:9999) 用户名:xiaomaigou，密码:123456<br>
 [小麦购商场-商品搜索](http://search.xiaomaigou.com:9999) <br>
