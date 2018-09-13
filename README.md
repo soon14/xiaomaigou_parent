@@ -5,9 +5,9 @@
 </p>
 
 项目演示：<br>
-[小麦购商场-首页](http://xiaomaigou.com:9999/) <br>
-[小麦购商场-运营商后台管理](http://admin.xiaomaigou.com:9999) 用户名:admin，密码:123456<br>
-[小麦购商场-商家后台管理](http://shop.xiaomaigou.com:9999) 用户名:xiaomaigou，密码:123456<br>
+[小麦购商场-首页](http://xiaomaigou.com:9999) <br>
+[小麦购商场-运营商后台管理](http://admin.xiaomaigou.com:9999) (用户名:admin，密码:123456)<br>
+[小麦购商场-商家后台管理](http://shop.xiaomaigou.com:9999) (用户名:xiaomaigou，密码:123456)<br>
 [小麦购商场-商品搜索](http://search.xiaomaigou.com:9999) <br>
 
 小麦购(XiaoMaiGou.COM)项目是一套整合 **Dubbo+Zookeeper+SpringMVC+Spring+MyBatis** 支持**分布式**高效率便捷开发**RPC**框架的企业级大型分布式电商网站系统，使开发人员更专注于业务，达到面向业务开发。<br>
