@@ -1,6 +1,7 @@
 package com.xiaomaigou.sellergoods.service;
 
 import com.xiaomaigou.pojo.TbGoods;
+import com.xiaomaigou.pojo.TbItem;
 import com.xiaomaigou.pojogroup.Goods;
 import entity.PageResult;
 
@@ -74,5 +75,14 @@ public interface GoodsService {
      * @param status
      */
     public void updateStatus(Long [] ids,String status );
+
+    /**
+     * 根据商品ID和状态查询Item表信息
+     * @param goodsIds
+     * @param status
+     * @return
+     */
+    public List<TbItem> findItemListByGoodsIdListAndStatus(Long[] goodsIds, String status );
+
 
 }

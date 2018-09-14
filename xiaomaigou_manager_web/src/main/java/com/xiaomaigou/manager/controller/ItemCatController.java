@@ -22,7 +22,8 @@ import java.util.List;
 public class ItemCatController {
 
     //注意：这里必须使用com.alibaba.dubbo.config.annotation.Reference;因为它远程调用，而不是本地调用，不能使用@Autowired注入，也叫远程注入
-    @Reference
+    //测试过程中发现，该类中的saveItemCatToRedis方法由于要查询全部商品分类并写入缓存，花费时间较长，所以此处修改为50秒
+    @Reference(timeout = 50000)
     private ItemCatService itemCatService;
 
     /**

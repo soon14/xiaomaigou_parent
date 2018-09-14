@@ -23,7 +23,7 @@ import java.util.List;
 public class SellerController {
 
     //注意：这里必须使用com.alibaba.dubbo.config.annotation.Reference;因为它远程调用，而不是本地调用，不能使用@Autowired注入，也叫远程注入
-    @Reference
+    @Reference(timeout = 10000)
     private SellerService sellerService;
 
     /**

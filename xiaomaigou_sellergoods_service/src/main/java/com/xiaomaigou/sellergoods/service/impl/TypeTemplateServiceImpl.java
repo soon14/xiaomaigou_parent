@@ -13,6 +13,7 @@ import com.xiaomaigou.pojo.TbTypeTemplateExample;
 import com.xiaomaigou.sellergoods.service.TypeTemplateService;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -34,6 +35,9 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
     //规格选项
     @Autowired
     private TbSpecificationOptionMapper specificationOptionMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 查询全部
@@ -91,7 +95,6 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         }
     }
 
-
     @Override
     public PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -116,7 +119,30 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         }
 
         Page<TbTypeTemplate> page = (Page<TbTypeTemplate>) typeTemplateMapper.selectByExample(example);
+
+        //缓存处理
+        saveToRedis();
+
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 将所有品牌列表与规格列表放入缓存
+     */
+    private void saveToRedis(){
+        List<TbTypeTemplate> templateList = findAll();
+        for(TbTypeTemplate template:templateList){
+            //得到品牌列表
+            List brandList= JSON.parseArray(template.getBrandIds(), Map.class) ;
+            redisTemplate.boundHashOps("brandList").put(template.getId(), brandList);
+
+            //得到规格列表（包括规格的选项）
+            List<Map> specList = findSpecList(template.getId());
+            redisTemplate.boundHashOps("specList").put(template.getId(), specList);
+
+        }
+        System.out.println("缓存品牌列表");
+
     }
 
     //根据模板id查询该模板的规格列表并转换为规格选项

@@ -20,6 +20,10 @@
         <module>xiaomaigou_content_interface</module>
         <module>xiaomaigou_content_service</module>
         <module>xiaomaigou_portal_web</module>
+        <module>xiaomaigou_solr_util</module>
+        <module>xiaomaigou_search_interface</module>
+        <module>xiaomaigou_search_service</module>
+        <module>xiaomaigou_search_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
@@ -40,7 +44,9 @@
         <freemarker.version>2.3.23</freemarker.version>
         <activemq.version>5.15.2</activemq.version>
         <security.version>3.2.3.RELEASE</security.version>
-        <solrj.version>7.1.0</solrj.version>
+        <!--<solrj.version>7.3.0</solrj.version>-->
+        <!-- spring-data-solr的版本与7.3.0不兼容，改为4.10.3 -->
+        <solrj.version>4.10.3</solrj.version>
         <ik.version>2012_u6</ik.version>
     </properties>
 

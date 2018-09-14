@@ -2,7 +2,9 @@ package com.xiaomaigou.manager.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.xiaomaigou.pojo.TbGoods;
+import com.xiaomaigou.pojo.TbItem;
 import com.xiaomaigou.pojogroup.Goods;
+import com.xiaomaigou.search.service.ItemSearchService;
 import com.xiaomaigou.sellergoods.service.GoodsService;
 import entity.PageResult;
 import entity.Result;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,6 +28,9 @@ public class GoodsController {
     //注意：这里必须使用com.alibaba.dubbo.config.annotation.Reference;因为它远程调用，而不是本地调用，不能使用@Autowired注入，也叫远程注入
     @Reference
     private GoodsService goodsService;
+
+    @Reference(timeout=100000)
+    private ItemSearchService itemSearchService;
 
     /**
      * 返回全部列表
@@ -102,6 +108,8 @@ public class GoodsController {
     public Result delete(Long[] ids) {
         try {
             goodsService.delete(ids);
+            //根据id从索引库中删除
+            itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
             return new Result(true, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,6 +139,20 @@ public class GoodsController {
     public Result updateStatus(Long[] ids, String status){
         try {
             goodsService.updateStatus(ids, status);
+            //按照SPU ID查询 SKU列表(状态为1，即启用，而不是下架或者删除)
+            if("1".equals(status)){//如果是审核通过
+                //得到需要导入的SKU列表
+                List<TbItem> itemList = goodsService.findItemListByGoodsIdListAndStatus(ids, status);
+                //调用搜索接口实现数据批量导入
+                if(itemList.size()>0){
+                    //导入到solr
+                    itemSearchService.importList(itemList);
+                }else{
+                    System.out.println("没有明细数据导入！");
+                }
+
+            }
+
             return new Result(true, "更新状态成功");
         } catch (Exception e) {
             e.printStackTrace();

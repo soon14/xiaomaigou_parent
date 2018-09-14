@@ -11,5 +11,13 @@
 
     <artifactId>xiaomaigou_pojo</artifactId>
 
+    <dependencies>
+        <!-- spring-data-solr 导入数据库数据到solr系统时使用-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+            <version>1.5.5.RELEASE</version>
+        </dependency>
+    </dependencies>
 
 </project>
