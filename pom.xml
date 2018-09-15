@@ -24,6 +24,9 @@
         <module>xiaomaigou_search_interface</module>
         <module>xiaomaigou_search_service</module>
         <module>xiaomaigou_search_web</module>
+        <module>xiaomaigou_page_interface</module>
+        <module>xiaomaigou_page_service</module>
+        <module>xiaomaigou_page_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

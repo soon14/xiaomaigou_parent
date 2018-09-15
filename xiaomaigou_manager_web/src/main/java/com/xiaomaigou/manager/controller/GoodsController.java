@@ -1,6 +1,7 @@
 package com.xiaomaigou.manager.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.xiaomaigou.page.service.ItemPageService;
 import com.xiaomaigou.pojo.TbGoods;
 import com.xiaomaigou.pojo.TbItem;
 import com.xiaomaigou.pojogroup.Goods;
@@ -31,6 +32,9 @@ public class GoodsController {
 
     @Reference(timeout=100000)
     private ItemSearchService itemSearchService;
+
+    @Reference(timeout=40000)
+    private ItemPageService itemPageService;
 
     /**
      * 返回全部列表
@@ -151,6 +155,10 @@ public class GoodsController {
                     System.out.println("没有明细数据导入！");
                 }
 
+                // 生成商品html详细静态页面
+                for(Long goodsId:ids){
+                    itemPageService.genItemHtml(goodsId);
+                }
             }
 
             return new Result(true, "更新状态成功");
@@ -159,5 +167,13 @@ public class GoodsController {
             return new Result(false, "更新状态失败");
         }
     }
+
+    // 生成html静态页面
+//    @RequestMapping("/genHtml")
+//    public void genHtml(Long goodsId){
+//
+//        itemPageService.genItemHtml(goodsId);
+//
+//    }
 
 }
