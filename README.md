@@ -4,7 +4,7 @@
   <img src="src/main/resources/xiaomaigoulogo/xiaomaigoulogo.png" alt="xiaomaigou.com" title="xiaomaigou.com">
 </p>
 
-项目演示：<br>
+项目演示：(商品详情页功能暂未更新)<br>
 [小麦购商场-首页](http://xiaomaigou.com:9999) <br>
 [小麦购商场-运营商后台管理](http://admin.xiaomaigou.com:9999) (用户名:admin，密码:123456)<br>
 [小麦购商场-商家后台管理](http://shop.xiaomaigou.com:9999) (用户名:xiaomaigou，密码:123456)<br>
@@ -18,7 +18,8 @@
 该项目是[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目的**简化版**，完整资料请参照[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目，持续更新中，敬请期待...
 
 ## 近期更新内容
-* **beta 0.0.7：完成搜索功能及与商场首页对接**
+* **beta 0.0.7：完成商品详情页并与搜索页对接**
+* beta 0.0.7：完成搜索功能及与商场首页对接
 * beta 0.0.6：完成前台首页广告轮播
 * beta 0.0.5：完成商品录入、商品修改及商品审核功能
 * beta 0.0.4：完成商家审核、运营商管理系统和商家管理系统登录与安全控制及商品分类管理
@@ -28,5 +29,5 @@
 
 ## 已知bug
 * 1.服务层xiaomaigou_content_service和xiaomaigou_sellergoods_service项目在添加注解式事务后无法在Dubbo注册中心注册；
-* 2.前台xiaomaigou_portal_web项目前台首页轮播图在部分浏览器（如360浏览器、IE浏览器等）中无法正常显示轮播图，在谷歌浏览器中能正常显示图片但仍然会前台报错找不到图片资源；
+* 
 
