@@ -1,5 +1,6 @@
 package com.xiaomaigou.page.service.impl;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -9,9 +10,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.alibaba.dubbo.config.annotation.Service;
+//import com.alibaba.dubbo.config.annotation.Service;
 import com.xiaomaigou.mapper.TbGoodsDescMapper;
 import com.xiaomaigou.mapper.TbGoodsMapper;
 import com.xiaomaigou.mapper.TbItemCatMapper;
@@ -29,7 +31,9 @@ import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateNotFoundException;
 
+//此处为org.springframework.stereotype.Service，因为不再是使用dubbo远程调用
 @Service
+//@Service
 public class ItemPageServiceImpl implements ItemPageService {
 
     @Autowired
@@ -96,6 +100,19 @@ public class ItemPageServiceImpl implements ItemPageService {
             return false;
         }
 
+    }
+
+    @Override
+    public boolean deleteItemHtml(Long[] goodsIds) {
+        try {
+            for(Long goodsId:goodsIds){
+                new File(pagedir+goodsId+".html").delete();
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

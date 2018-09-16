@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-<!-- TODO 本项目xiaomaigou_content_service缺少注解式事务 -->
     <!-- 访问dubbo所要占用的端口 -->
     <!-- 注意：启动多个服务工程时，不要发生端口冲突，因为连接dubbox注册中心的端口默认是20880。所以需要配置一下pinyougou-content-service工程的dubbox端口 -->
-    <dubbo:protocol name="dubbo" port="20885"></dubbo:protocol>
+    <!--<dubbo:protocol name="dubbo" port="20885"></dubbo:protocol>-->
     <!-- 当前的应用在注册中心的名称 -->
-    <dubbo:application name="xiaomaigou_page_service"/>
+    <!--<dubbo:application name="xiaomaigou_page_service"/>-->
     <!-- dubbo注册中心zookeeper地址 -->
-    <dubbo:registry address="zookeeper://192.168.199.99:2181"/>
+    <!--<dubbo:registry address="zookeeper://192.168.199.99:2181"/>-->
     <!--dubbo的扫描包，告诉dubbo这个服务所在的包 -->
-    <dubbo:annotation package="com.xiaomaigou.page.service.impl"/>
+    <!--<dubbo:annotation package="com.xiaomaigou.page.service.impl"/>-->
+
+    <context:component-scan base-package="com.xiaomaigou.page.service.impl"/>
 
     <bean id="freemarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

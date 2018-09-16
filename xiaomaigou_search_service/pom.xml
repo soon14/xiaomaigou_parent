@@ -90,6 +90,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- activemq -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>5.15.5</version>
+        </dependency>
+
         <dependency>
             <groupId>com.xiaomaigou</groupId>
             <artifactId>xiaomaigou_search_interface</artifactId>

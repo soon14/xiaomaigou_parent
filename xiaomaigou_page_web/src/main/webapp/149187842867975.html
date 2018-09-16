@@ -19,10 +19,22 @@
     <script>
         var skuList=[
                      {
-             id:1369336,
-             title:'ccc123',
-             price:123,
-             spec:{}
+             id:1369333,
+             title:'平板电视 41英寸',
+             price:0,
+             spec:{"电视屏幕尺寸":"41英寸"}
+           },
+           {
+             id:1369332,
+             title:'平板电视 40英寸',
+             price:0,
+             spec:{"电视屏幕尺寸":"40英寸"}
+           },
+           {
+             id:1369334,
+             title:'平板电视 48英寸',
+             price:0,
+             spec:{"电视屏幕尺寸":"48英寸"}
            },
         ];
         
@@ -144,13 +156,13 @@
 			<div class="crumb-wrap">
 				<ul class="sui-breadcrumb">
 					<li>
-						<a href="#">图书、音像、电子书刊</a>
+						<a href="#">家用电器</a>
 					</li>
 					<li>
-						<a href="#">音像</a>
+						<a href="#">大家电</a>
 					</li>
 					<li>
-						<a href="#">影视</a>
+						<a href="#">平板电视</a>
 					</li>	
 							
 				</ul>
@@ -181,7 +193,7 @@
 					<div class="sku-name">
 						<h4>{{sku.title}}</h4>
 					</div>
-					<div class="news"><span>123 </span></div>
+					<div class="news"><span>没有 </span></div>
 					<div class="summary">
 						<div class="summary-wrap">
 							<div class="fl title">
@@ -227,6 +239,30 @@
 					</div>
 					<div class="clearfix choose">
 						<div id="specification" class="summary-wrap clearfix">
+							
+							  <dl>
+								<dt>
+									<div class="fl title">
+									<i>电视屏幕尺寸</i>
+								</div>
+								</dt>
+								
+								  <dd><a href="javascript:;" 
+								        class="{{isSelected('电视屏幕尺寸','40英寸')?'selected':''}}" 
+								        ng-click="selectSpecification('电视屏幕尺寸','40英寸')">40英寸
+								        <span title="点击取消选择">&nbsp;</span>
+								        </a></dd>
+								  <dd><a href="javascript:;" 
+								        class="{{isSelected('电视屏幕尺寸','41英寸')?'selected':''}}" 
+								        ng-click="selectSpecification('电视屏幕尺寸','41英寸')">41英寸
+								        <span title="点击取消选择">&nbsp;</span>
+								        </a></dd>
+								  <dd><a href="javascript:;" 
+								        class="{{isSelected('电视屏幕尺寸','48英寸')?'selected':''}}" 
+								        ng-click="selectSpecification('电视屏幕尺寸','48英寸')">48英寸
+								        <span title="点击取消选择">&nbsp;</span>
+								        </a></dd>
+							  </dl>
 							
 						</div>
 					
@@ -466,7 +502,7 @@
 								<ul class="goods-intro unstyled">
 								</ul>
 								<div class="intro-detail">
-									
+									卧槽
 								</div>
 							</div>
 							<div id="two" class="tab-pane">
