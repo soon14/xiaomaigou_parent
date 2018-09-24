@@ -27,6 +27,9 @@
         <module>xiaomaigou_page_interface</module>
         <module>xiaomaigou_page_service</module>
         <module>xiaomaigou_page_web</module>
+        <module>xiaomaigou_user_interface</module>
+        <module>xiaomaigou_user_service</module>
+        <module>xiaomaigou_user_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
