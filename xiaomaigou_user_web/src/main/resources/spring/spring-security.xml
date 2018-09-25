@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 设置页面不登录也可以访问 -->
+    <!-- security="none"  设置此资源不被拦截 -->
+    <!-- 匿名访问资源 -->
+    <http pattern="/css/**" security="none"></http>
+    <http pattern="/js/**" security="none"></http>
+    <http pattern="/image/**" security="none"></http>
+    <http pattern="/plugins/**" security="none"></http>
+    <http pattern="/register.html" security="none"></http>
+    <http pattern="/user/add.do" security="none"></http>
+    <http pattern="/user/sendCode.do" security="none"></http>
+
+    <!-- 页面的拦截规则    use-expressions:是否启动SPEL表达式 默认是true ,如果开启，则拦截的配置应该写成以下形式 <intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> 若为access="ROLE_USER"格式则必须为false-->
+    <!-- entry-point-ref 入口点引用 -->
+    <http use-expressions="false" entry-point-ref="casProcessingFilterEntryPoint">
+        <!-- 当前用户必须有ROLE_USER的角色 才可以访问根目录及所属子目录的资源 /**表示的是该目录以及该目录下所有级别子目录的资源 而/* 表示的是该目录下的资源，只包括本级目录不包括下级目录 -->
+        <!--access：必须以"ROLE_"开头，后面的自己定义 -->
+        <intercept-url pattern="/**" access="ROLE_USER"/>
+
+        <!-- csrf disabled="true"  关闭csrf  -->
+        <!-- CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用 -->
+        <csrf disabled="true"/>
+
+        <!-- custom-filter为过滤器， position 表示将过滤器放在指定的位置上，before表示放在指定位置之前  ，after表示放在指定的位置之后  -->
+        <custom-filter ref="casAuthenticationFilter" position="CAS_FILTER"/>
+        <custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
+        <custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
+    </http>
+
+    <!-- CAS入口点 开始 -->
+    <beans:bean id="casProcessingFilterEntryPoint"
+                class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+        <!-- 单点登录CAS服务器的登录URL -->
+        <beans:property name="loginUrl" value="http://192.168.199.103:9099/cas/login"/>
+        <beans:property name="serviceProperties" ref="serviceProperties"/>
+    </beans:bean>
+    <beans:bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
+        <!-- service 配置当前应用的根地址+/login/cas，后面加/login/cas 是因为cas的集成产生的,该地址自动产生 -->
+        <beans:property name="service" value="http://192.168.199.190:9099/xiaomaigou_user_web/login/cas"/>
+    </beans:bean>
+    <!-- CAS入口点 结束 -->
+
+    <!-- 认证过滤器 开始 -->
+    <beans:bean id="casAuthenticationFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter">
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+    </beans:bean>
+    <!-- 认证管理器 -->
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="casAuthenticationProvider">
+        </authentication-provider>
+    </authentication-manager>
+    <!-- 认证提供者 -->
+    <beans:bean id="casAuthenticationProvider"
+                class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+        <beans:property name="authenticationUserDetailsService">
+            <beans:bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+                <beans:constructor-arg ref="userDetailsService"/>
+            </beans:bean>
+        </beans:property>
+        <beans:property name="serviceProperties" ref="serviceProperties"/>
+        <!-- ticketValidator 为票据验证器，负责对Ticket的校验工作 -->
+        <beans:property name="ticketValidator">
+            <beans:bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+                <!-- CAS服务端地址 -->
+                <beans:constructor-arg index="0" value="http://192.168.199.103:9099/cas"/>
+            </beans:bean>
+        </beans:property>
+        <beans:property name="key" value="an_id_for_this_auth_provider_only"/>
+    </beans:bean>
+    <!-- 认证类 -->
+    <beans:bean id="userDetailsService" class="com.xiaomaigou.user.service.UserDetailServiceImpl"/>
+    <!-- 认证过滤器 结束 -->
+
+    <!-- 单点登出  开始  -->
+    <beans:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
+    <!-- 经过此配置，当用户在地址栏输入本地工程+/logout/cas即可实现单点登出功能，即相当于把真实的登出地址进行了封装 -->
+    <beans:bean id="requestSingleLogoutFilter"
+                class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <!-- 单点登出的地址以及登出后需要跳转的地址 -->
+        <beans:constructor-arg
+                value="http://192.168.199.103:9099/cas/logout?service=http://192.168.199.190:9093/xiaomaigou_portal_web"/>
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+        </beans:constructor-arg>
+        <beans:property name="filterProcessesUrl" value="/logout/cas"/>
+    </beans:bean>
+    <!-- 单点登出  结束 -->
+
+</beans:beans>

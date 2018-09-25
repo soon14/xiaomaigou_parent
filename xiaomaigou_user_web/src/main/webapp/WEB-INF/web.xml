@@ -30,15 +30,36 @@
       <param-value>classpath:spring/springmvc.xml</param-value>
     </init-param>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
-  <!--&lt;!&ndash; 首页 &ndash;&gt;-->
-  <!--<welcome-file-list>-->
-  <!--<welcome-file>ano/index.html</welcome-file>-->
-  <!--</welcome-file-list>-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-security.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!-- 过滤器 -->
+    <!-- 使用org.springframework.web.filter.DelegatingFilterProxy代理类过滤，注意：springSecurityFilterChain这个名称不能改变，这是已经内置好的名称 -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <!-- 过滤根目录下的所有资源，名称也不能修改springSecurityFilterChain -->
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+  <!-- 首页 -->
+  <welcome-file-list>
+  <welcome-file>home-index.html</welcome-file>
+  </welcome-file-list>
 
 </web-app>

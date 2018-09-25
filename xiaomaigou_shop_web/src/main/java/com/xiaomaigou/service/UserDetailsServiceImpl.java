@@ -35,12 +35,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("经过了UserDetailsServiceImpl，username：" + username);
 
-        //构建一个角色列表
+        // 构建一个角色列表
         List<GrantedAuthority> grantAuths = new ArrayList<>();
         // 添加了一个名称为ROLE_SELLER角色（ROLE_SELLER需要与配置文件中的角色名一致）
         grantAuths.add(new SimpleGrantedAuthority("ROLE_SELLER"));
 
-        //通过商家用户名(id，主键，唯一)获取商家对象
+        // 通过商家用户名(id，主键，唯一)获取商家对象
         TbSeller seller = sellerService.findOne(username);
         if (seller != null) {
             //只有状态为"1"（审核通过）的用户才能登录
