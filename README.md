@@ -4,7 +4,7 @@
   <img src="src/main/resources/xiaomaigoulogo/xiaomaigoulogo.png" alt="xiaomaigou.com" title="xiaomaigou.com">
 </p> 
 
-## 项目演示(普通用户注册和登录功能暂未更新)：<br>
+## 项目演示(普通用户注册和登录以及购物车功能暂未更新)：<br>
 [小麦购商城(XiaoMaiGou.COM)-首页](http://xiaomaigou.com:9999) <br>
 [小麦购商城(XiaoMaiGou.COM)-运营商后台管理](http://admin.xiaomaigou.com:9999) (用户名:admin，密码:123456)<br>
 [小麦购商城(XiaoMaiGou.COM)-商家后台管理](http://item.xiaomaigou.com:9999/xiaomaigou_shop_web) (用户名:xiaomaigou，密码:123456)<br>
@@ -19,6 +19,7 @@
 该项目是[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目的**简化版**，完整资料请参照[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目，持续更新中，敬请期待...
 
 ## 近期更新内容
+* beta 0.1.1：完成购物车存储功能(Cookie和Redis)
 * **beta 0.1.1：完成用户中心单点登录功能**
 * beta 0.1.0：实现短信验证,完成用户注册功能
 * beta 0.0.9：整合消息中间件ActiveMQ，完成异步导入/删除索引库和生成/删除商品静态详细页功能
