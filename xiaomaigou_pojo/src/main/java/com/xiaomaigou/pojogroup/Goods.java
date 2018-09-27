@@ -10,7 +10,7 @@ import com.xiaomaigou.pojo.TbItem;
 
 /**
  * 商品组合实体类
- * @author Administrator
+ * @author root
  *
  */
 public class Goods implements Serializable{
