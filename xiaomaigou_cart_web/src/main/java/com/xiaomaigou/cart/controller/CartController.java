@@ -9,6 +9,7 @@ import com.xiaomaigou.cart.service.CartService;
 import com.xiaomaigou.pojogroup.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,7 +69,13 @@ public class CartController {
     }
 
     @RequestMapping("/addGoodsToCartList")
+    @CrossOrigin(origins="http://192.168.199.190:9097",allowCredentials="true")
     public Result addGoodsToCartList(Long itemId,Integer num){
+
+        //response.setHeader("Access-Control-Allow-Origin", "http://192.168.199.190:9097");//可以访问的域(当此方法不需要操作cookie)
+        //response.setHeader("Access-Control-Allow-Origin", "*");//使用"*"将允许所有的域均可访问，但是如果为"*"，则不能再操作cookie，因为cookie本身是和域相关的一个东西
+        //response.setHeader("Access-Control-Allow-Credentials", "true");//如果操作cookie，必须加上这句话，并且，需要在客户端请求时添加{'withCredentials':true}
+
         //当前登录人账号
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("当前登录用户名："+username);

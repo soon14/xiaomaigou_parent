@@ -1,4 +1,4 @@
-app.controller("itemController",function($scope){
+app.controller("itemController",function($scope,$http){
 	
 	$scope.specificationItems={};//存储用户选择的规格
 	
@@ -65,7 +65,18 @@ app.controller("itemController",function($scope){
 	
 	//添加商品到购物车
 	$scope.addToCart=function(){
-		alert('SKUID:'+$scope.sku.id );		
+		// alert('SKUID:'+$scope.sku.id );
+
+        $http.get('http://192.168.199.190:9991/xiaomaigou_cart_web/cart/addGoodsToCartList.do?itemId='+$scope.sku.id+'&num='+$scope.num ,{'withCredentials':true}).success(
+            function(response){
+                if(response.success){
+                    location.href='http://192.168.199.190:9991/xiaomaigou_cart_web/cart.html';
+                }else{
+                    alert(response.message);
+                }
+            }
+        );
+
 	}
 
     //搜索（传递参数）并跳转到搜索页
@@ -73,6 +84,5 @@ app.controller("itemController",function($scope){
         location.href="http://192.168.199.190:9095/xiaomaigou_search_web/search.html#?keywords="+$scope.keywords;
 
     }
-	
-	
+
 });
