@@ -39,5 +39,5 @@
 
 ## 已知bug
 * 1.服务层xiaomaigou_content_service和xiaomaigou_sellergoods_service项目在添加注解式事务后无法在Dubbo注册中心注册；
-2.秒杀系统每个用户只能秒杀一个订单(存在bug)；
+* 2.秒杀系统每个用户只能秒杀一个订单(存在bug)；
 
