@@ -37,6 +37,9 @@
         <module>xiaomaigou_order_service</module>
         <module>xiaomaigou_pay_interface</module>
         <module>xiaomaigou_pay_service</module>
+        <module>xiaomaigou_seckill_interface</module>
+        <module>xiaomaigou_seckill_service</module>
+        <module>xiaomaigou_seckill_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

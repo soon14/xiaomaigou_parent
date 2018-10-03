@@ -19,7 +19,8 @@
 该项目是[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目的**简化版**，完整资料请参照[xiaomaiyun_SSM](https://github.com/xiaomaiyun/xiaomaiyun_SSM)项目，持续更新中，敬请期待...
 
 ## 近期更新内容
-* **beta 0.1.3：完成跨域解决方案与提交订单**
+* **beta 0.1.4：完成商品秒杀系统**
+* beta 0.1.3：完成跨域解决方案与提交订单
 * beta 0.1.2：完成购物车存储功能(Cookie和Redis)
 * beta 0.1.1：完成用户中心单点登录功能
 * beta 0.1.0：实现短信验证,完成用户注册功能
@@ -33,6 +34,10 @@
 * beta 0.0.2：完成品牌管理增、删、改、查功能，优化整体代码、添加更多注释，结构更清晰、代码更易懂
 * beta 0.0.1：项目构建
 
+## 联系作者
+小麦:xiaomaiyun@xiaomaigou.com
+
 ## 已知bug
 * 1.服务层xiaomaigou_content_service和xiaomaigou_sellergoods_service项目在添加注解式事务后无法在Dubbo注册中心注册；
+2.秒杀系统每个用户只能秒杀一个订单(存在bug)；
 
