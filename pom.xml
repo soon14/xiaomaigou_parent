@@ -35,6 +35,8 @@
         <module>xiaomaigou_cart_web</module>
         <module>xiaomaigou_order_interface</module>
         <module>xiaomaigou_order_service</module>
+        <module>xiaomaigou_pay_interface</module>
+        <module>xiaomaigou_pay_service</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
